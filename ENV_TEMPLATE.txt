@@ -1,0 +1,11 @@
+Copy this file's contents into a new file named  .env.local  at the project root.
+
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxxxxxxxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGci...
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+Both Supabase values come from your project's
+Settings -> API  (Project URL, and the "anon public" key).
+
+On Vercel, add the same three under Settings -> Environment Variables,
+with NEXT_PUBLIC_SITE_URL set to your production https URL.

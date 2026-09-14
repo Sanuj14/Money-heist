@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+
+html, body { height: 100%; }
+body {
+  @apply bg-ink text-bone font-body antialiased;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 68px 68px;
+  background-position: -1px -1px;
+}
+
+@layer components {
+  /* ---- surfaces ------------------------------------------------ */
+  .paper {
+    @apply rounded-[18px] border border-ink-line bg-ink-soft/85 shadow-card backdrop-blur-[2px];
+  }
+  .paper-bone {
+    @apply rounded-[18px] bg-bone text-ink shadow-card;
+    background-image:
+      linear-gradient(rgba(20,17,15,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,17,15,.06) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+  .sticky-note {
+    @apply bg-gold text-ink rounded-[6px] shadow-card font-mono;
+    transform: rotate(-2deg);
+  }
+  .taped {
+    @apply relative bg-bone p-2 pb-8 shadow-card;
+  }
+  .taped::before {
+    content: "";
+    @apply absolute left-1/2 -top-3 h-6 w-16 -translate-x-1/2 rounded-[3px];
+    background: rgba(245,197,66,.85);
+    box-shadow: 0 2px 6px rgba(0,0,0,.35);
+  }
+
+  /* ---- type ---------------------------------------------------- */
+  .display {
+    @apply font-display uppercase leading-[0.86] tracking-[-0.02em];
+  }
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.28em] text-bone/45;
+  }
+
+  /* ---- controls ------------------------------------------------ */
+  .pill {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5
+           font-mono text-[12px] uppercase tracking-[0.16em] transition
+           disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .pill-red   { @apply pill bg-dali text-white hover:bg-dali-soft; }
+  .pill-gold  { @apply pill bg-gold text-ink hover:bg-gold-deep; }
+  .pill-ghost { @apply pill border border-ink-line bg-transparent text-bone/75 hover:border-bone/40 hover:text-bone; }
+  .pill-bone  { @apply pill bg-bone text-ink hover:bg-bone-dim; }
+
+  .field {
+    @apply w-full rounded-xl border border-ink-line bg-ink px-4 py-3 text-bone
+           placeholder:text-bone/25 outline-none transition
+           focus:border-gold/70 focus:shadow-goldy;
+  }
+  .field-code {
+    @apply field text-center font-mono text-2xl uppercase tracking-[0.5em];
+  }
+  .label { @apply mb-1.5 block font-mono text-[11px] uppercase tracking-[0.2em] text-bone/45; }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink-line
+           px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-bone/60;
+  }
+  .tabbtn {
+    @apply rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em]
+           text-bone/55 transition hover:text-bone;
+  }
+  .tabbtn-on { @apply bg-bone text-ink hover:text-ink; }
+}
+
+/* mask silhouette used as a watermark */
+.mask-watermark {
+  background-image: radial-gradient(circle at 30% 40%, rgba(230,51,41,.16), transparent 60%),
+                    radial-gradient(circle at 75% 25%, rgba(245,197,66,.10), transparent 55%);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #14110F; }
+::-webkit-scrollbar-thumb { background: #3A322E; border-radius: 9px; }
