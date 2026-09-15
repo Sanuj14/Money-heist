@@ -9,7 +9,7 @@ export default function BoardEntry() {
   const [code, setCode] = useState("");
   return (
     <div className="min-h-screen">
-      <Nav />
+      <Nav back={{ href: "/", label: "Home" }} />
       <main className="grid place-items-center px-4 py-24">
         <form
           onSubmit={(e) => { e.preventDefault(); router.push(`/board/${code.trim().toUpperCase()}`); }}

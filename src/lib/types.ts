@@ -12,6 +12,7 @@ export interface Room {
   floor_pct: number;
   timeout_points: number;
   auto_advance: boolean;
+  require_team_code: boolean;
   created_at: string;
   started_at: string | null;
   ended_at: string | null;
@@ -107,4 +108,12 @@ export interface ScanResult {
   max_points?: number;
   step_index?: number;
   finished?: boolean;
+}
+
+export interface RoomTeamOption {
+  team_id: string;
+  name: string;
+  colour: string;
+  members: number;
+  route_length: number;
 }

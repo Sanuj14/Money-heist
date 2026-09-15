@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Wordmark } from "@/components/Brand";
+import { BackButton } from "@/components/Nav";
 import type { Room, Clue, Team, AdminTeamState } from "@/lib/types";
 import CluesTab from "./CluesTab";
 import TeamsTab from "./TeamsTab";
@@ -82,6 +83,7 @@ export default function RoomConsole({
       <header className="sticky top-0 z-40 border-b border-ink-line bg-ink/92 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6">
           <div className="flex flex-wrap items-center gap-3">
+            <BackButton href="/admin" label="All rooms" />
             <Link href="/admin"><Wordmark compact /></Link>
             <div className="min-w-0">
               <h1 className="display truncate text-[18px] text-bone">{room.name}</h1>

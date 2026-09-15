@@ -23,6 +23,7 @@ export default async function PlayEntry() {
   return (
     <div className="min-h-screen">
       <Nav
+        back={{ href: "/", label: "Home" }}
         right={
           <form action="/auth/signout" method="post">
             <button className="pill-ghost">Sign out</button>

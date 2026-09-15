@@ -16,6 +16,7 @@ export default function ScoringTab({
     base_points: room.base_points,
     floor_pct: room.floor_pct,
     timeout_points: room.timeout_points,
+    require_team_code: room.require_team_code ?? true,
   });
   const [busy, setBusy] = useState(false);
 
@@ -56,7 +57,26 @@ export default function ScoringTab({
             onChange={(v) => setF({ ...f, timeout_points: v })} hint="negative = penalty" />
         </div>
 
-        <button onClick={save} disabled={busy} className="pill-gold mt-7 !px-8">
+        <label className="mt-7 flex cursor-pointer items-start gap-3 rounded-xl border border-ink-line bg-ink p-4">
+          <input
+            type="checkbox"
+            checked={f.require_team_code}
+            onChange={(e) => setF({ ...f, require_team_code: e.target.checked })}
+            className="mt-0.5 h-4 w-4 accent-[#E63329]"
+          />
+          <span>
+            <span className="block font-display text-[13px] uppercase text-bone">
+              Require the team code to join
+            </span>
+            <span className="mt-1 block text-[12px] leading-relaxed text-bone/45">
+              Off: the room code alone lets a player pick any crew — fastest on
+              event day. On: they must also type their crew&apos;s six-character
+              code, so nobody joins a rival crew and reads their clues.
+            </span>
+          </span>
+        </label>
+
+        <button onClick={save} disabled={busy} className="pill-gold mt-5 !px-8">
           {busy ? "Saving…" : "Save scoring"}
         </button>
 

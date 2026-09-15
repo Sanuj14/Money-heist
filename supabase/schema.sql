@@ -59,7 +59,7 @@ create table if not exists public.rooms (
   status             text not null default 'draft'
                      check (status in ('draft','live','paused','ended')),
   -- scoring configuration (linear decay)
-  time_limit_sec     int  not null default 600,   -- 10 minutes per clue
+  time_limit_sec     int  not null default 1200,  -- 20 minutes per clue
   base_points        int  not null default 1000,  -- points for an instant scan
   floor_pct          int  not null default 25,    -- % of base still earned at the buzzer
   timeout_points     int  not null default 0,     -- points when the 10 min lapse

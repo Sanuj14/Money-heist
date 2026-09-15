@@ -10,6 +10,10 @@ export default async function AdminRoom({ params }: { params: { roomId: string }
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect(`/login?next=/admin/${params.roomId}`);
 
+  const { data: me } = await supabase
+    .from("profiles").select("is_admin").eq("id", user.id).maybeSingle();
+  if (!me?.is_admin) redirect("/admin/denied");
+
   const { data: room } = await supabase
     .from("rooms").select("*").eq("id", params.roomId).maybeSingle();
   if (!room || room.owner_id !== user.id) notFound();

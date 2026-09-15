@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Scanner } from "@/components/Scanner";
 import { Wordmark } from "@/components/Brand";
+import { BackButton } from "@/components/Nav";
 import { mmss } from "@/lib/format";
 import type { MyClue, ScanResult, Challenge, LeaderRow } from "@/lib/types";
 
@@ -113,6 +114,7 @@ export default function GameClient({
       {/* header */}
       <header className="sticky top-0 z-30 border-b border-ink-line bg-ink/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-3xl items-center gap-3 px-4 py-3">
+          <BackButton href="/play" label="Leave" />
           <Wordmark compact />
           <div className="ml-auto text-right">
             <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/35">{roomName}</div>

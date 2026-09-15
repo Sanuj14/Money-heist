@@ -41,7 +41,7 @@ export default async function Landing() {
               <span className="text-dali">STARTS HERE</span>
             </h1>
             <p className="mx-auto mt-6 max-w-lg font-body text-[15px] leading-relaxed text-ink/65">
-              Scan the QR. Crack the clue. Beat the ten-minute clock. Every second
+              Scan the QR. Crack the clue. Beat the twenty-minute clock. Every second
               you shave off is a credit in the vault — and the leaderboard is watching.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -59,7 +59,7 @@ export default async function Landing() {
             </Polaroid>
             <StickyNote rotate={2} className="mt-6">
               <b className="block font-display text-[13px] uppercase">Rule one</b>
-              Ten minutes a clue. The clock never stops — not for arguments,
+              Twenty minutes a clue. The clock never stops — not for arguments,
               not for snacks.
             </StickyNote>
             <Polaroid caption="Exhibit B · The vault QR" rotate={4} tone="ink">
@@ -126,8 +126,8 @@ export default async function Landing() {
             </h3>
             <p className="mt-4 max-w-md text-[14px] leading-relaxed text-bone/55">
               Each clue is worth a base pot — 1000 credits by default. That pot decays
-              in a straight line across the ten-minute window down to a floor the admin
-              sets. Scan on minute one and you take almost everything. Scan at 9:58 and
+              in a straight line across the twenty-minute window down to a floor the admin
+              sets. Scan on minute one and you take almost everything. Scan at 19:58 and
               you still walk away with the floor. Let the window lapse and you take the
               timeout value, but the next clue unlocks regardless, so nobody gets stranded.
             </p>
@@ -156,7 +156,7 @@ export default async function Landing() {
               <text x="4" y="24" fill="#F4F0E4" fontSize="9" fontFamily="monospace">1000</text>
               <text x="8" y="129" fill="#F4F0E4" fontSize="9" fontFamily="monospace">250</text>
               <text x="30" y="158" fill="#8b8179" fontSize="9" fontFamily="monospace">0:00</text>
-              <text x="270" y="158" fill="#8b8179" fontSize="9" fontFamily="monospace">10:00</text>
+              <text x="270" y="158" fill="#8b8179" fontSize="9" fontFamily="monospace">20:00</text>
             </svg>
             <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-bone/35">
               Gold dash = timeout value

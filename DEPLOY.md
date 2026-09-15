@@ -58,7 +58,7 @@ the script is written to be re-runnable, so you can safely fix and re-run.
 **Project Settings → API**, copy:
 
 - **Project URL** → `https://xxxxxxxx.supabase.co`
-- **anon / public** key → the long `eyJ...` string
+- **publishable** key → `sb_publishable_...`
 
 > Use the **anon** key, never the `service_role` key. The service role key
 > bypasses every security rule in the schema. It must never appear in a
@@ -72,8 +72,9 @@ In `E:\Projects\Moneyhiest`, make a new file called exactly `.env.local`:
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxxxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOi...
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+SUPABASE_SECRET_KEY=sb_secret_...
 ```
 
 `.gitignore` already excludes it, so it will never be committed.
@@ -149,8 +150,9 @@ git status
 | Name | Value |
 |---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | your Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | your anon key |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | your publishable key |
 | `NEXT_PUBLIC_SITE_URL` | `https://money-heist-hunt.vercel.app` |
+| `SUPABASE_SECRET_KEY` | your **secret** key — server-side only, no `NEXT_PUBLIC_` prefix |
 
 For `NEXT_PUBLIC_SITE_URL` you're guessing your own URL before it exists. Vercel
 almost always gives you `https://<repo-name>.vercel.app`. If it hands you
@@ -225,7 +227,7 @@ Send me the exact error text and I'll work through it.
 - Free-tier Supabase pauses a project after 7 days of no activity. Open the
   dashboard the day before your event to make sure it's awake.
 - Free tier handles a campus-sized round comfortably — the load is a handful of
-  writes per team per ten minutes.
+  writes per team per twenty minutes.
 - Have the room code and every team code written down on paper. If a phone dies,
   a player signs in on a teammate's device with the same codes and picks up where
   the crew left off — progress lives on the team, not the device.

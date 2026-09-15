@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import NewRoom from "./NewRoom";
+import RoomCard from "./RoomCard";
 
 export const dynamic = "force-dynamic";
 
@@ -10,6 +11,10 @@ export default async function AdminHome() {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login?next=/admin");
+
+  const { data: me } = await supabase
+    .from("profiles").select("is_admin").eq("id", user.id).maybeSingle();
+  if (!me?.is_admin) redirect("/admin/denied");
 
   const { data: rooms } = await supabase
     .from("rooms")
@@ -20,6 +25,7 @@ export default async function AdminHome() {
   return (
     <div className="min-h-screen">
       <Nav
+        back={{ href: "/", label: "Home" }}
         right={
           <form action="/auth/signout" method="post">
             <button className="pill-ghost">Sign out</button>
@@ -41,20 +47,7 @@ export default async function AdminHome() {
         <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {(rooms ?? []).map((r) => (
             <li key={r.id}>
-              <Link href={`/admin/${r.id}`} className="paper block p-6 transition hover:border-gold/50">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.28em] text-gold">
-                    {r.code}
-                  </span>
-                  <span className={`chip ${
-                    r.status === "live" ? "!border-mint/50 !text-mint"
-                    : r.status === "paused" ? "!border-gold/50 !text-gold"
-                    : r.status === "ended" ? "!border-dali/50 !text-dali-soft" : ""
-                  }`}>{r.status}</span>
-                </div>
-                <h2 className="display mt-3 text-[24px] text-bone">{r.name}</h2>
-                {r.tagline && <p className="mt-1 text-[13px] text-bone/45">{r.tagline}</p>}
-              </Link>
+              <RoomCard room={r as any} />
             </li>
           ))}
           {(rooms ?? []).length === 0 && (

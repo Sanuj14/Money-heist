@@ -2,7 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 import { Mask } from "@/components/Brand";
+import { BackButton } from "@/components/Nav";
 import { mmss } from "@/lib/format";
 import type { LeaderRow } from "@/lib/types";
 
@@ -45,7 +47,10 @@ export default function BoardClient({ code }: { code: string }) {
   if (notFound) {
     return (
       <main className="grid min-h-screen place-items-center">
-        <p className="display text-[28px] text-bone/40">No heist under code {code}</p>
+        <div className="text-center">
+          <p className="display text-[28px] text-bone/40">No heist under code {code}</p>
+          <Link href="/board" className="pill-ghost mt-6">← Try another code</Link>
+        </div>
       </main>
     );
   }
@@ -55,7 +60,8 @@ export default function BoardClient({ code }: { code: string }) {
   return (
     <main className="min-h-screen px-4 py-6 sm:px-8">
       <header className="mx-auto flex max-w-6xl flex-wrap items-center gap-4">
-        <Mask className="h-10 w-10" />
+        <BackButton href="/board" label="Boards" />
+        <Link href="/"><Mask className="h-10 w-10" /></Link>
         <div>
           <h1 className="display text-[26px] leading-none text-bone sm:text-[34px]">
             {room?.name ?? "…"}
