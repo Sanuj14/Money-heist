@@ -3,6 +3,7 @@ import { Nav } from "@/components/Nav";
 import { Polaroid, StickyNote } from "@/components/Polaroid";
 import { Mask } from "@/components/Brand";
 import { createClient } from "@/lib/supabase/server";
+import { ResumeBanner } from "@/components/ResumeBanner";
 
 export default async function Landing() {
   const supabase = createClient();
@@ -76,6 +77,8 @@ export default async function Landing() {
           </div>
         </div>
       </section>
+
+      <ResumeBanner className="px-3 pt-6 sm:px-6" />
 
       {/* ---------------- RED BAND ---------------- */}
       <section className="px-3 py-6 sm:px-6">

@@ -2,18 +2,11 @@
 
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { StickyNote } from "@/components/Polaroid";
 import { JoinTarget, type JoinSelection } from "@/components/JoinTarget";
 
-export default function JoinForm({
-  email,
-  resumeTeamId,
-}: {
-  email: string;
-  resumeTeamId: string | null;
-}) {
+export default function JoinForm({ email }: { email: string }) {
   const router = useRouter();
   const [sel, setSel] = useState<JoinSelection | null>(null);
   const [busy, setBusy] = useState(false);
@@ -52,12 +45,6 @@ export default function JoinForm({
           </button>
         </div>
 
-        {resumeTeamId && (
-          <Link href={`/play/${resumeTeamId}`}
-            className="mt-6 block rounded-xl border border-gold/35 bg-gold/10 px-4 py-3 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-gold hover:bg-gold/15">
-            Resume your run in progress →
-          </Link>
-        )}
       </form>
 
       <StickyNote rotate={-3} className="mx-auto !w-[210px] md:mt-14">
