@@ -84,7 +84,7 @@ export default function LocationsTab({
       if (!m.has(p.team_id)) m.set(p.team_id, { name: p.team_name, colour: p.team_colour, players: [] });
       m.get(p.team_id)!.players.push(p);
     }
-    return [...m.entries()];
+    return Array.from(m.entries());
   }, [pings]);
 
   const live = pings.filter((p) => now - new Date(p.created_at).getTime() < STALE_AFTER_MS).length;
