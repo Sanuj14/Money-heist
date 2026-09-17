@@ -12,8 +12,9 @@ import ScoringTab from "./ScoringTab";
 import LiveTab from "./LiveTab";
 import ChallengesTab from "./ChallengesTab";
 import PrintTab from "./PrintTab";
+import LocationsTab from "./LocationsTab";
 
-const TABS = ["Live", "Clues", "Teams", "Challenges", "Scoring", "QR sheet"] as const;
+const TABS = ["Live", "Locations", "Clues", "Teams", "Challenges", "Scoring", "QR sheet"] as const;
 type Tab = (typeof TABS)[number];
 
 export default function RoomConsole({
@@ -138,6 +139,7 @@ export default function RoomConsole({
 
       <main className="mx-auto max-w-7xl px-4 py-7 sm:px-6">
         {tab === "Live" && <LiveTab room={room} state={state} teams={teams} refresh={refreshState} flash={flash} />}
+        {tab === "Locations" && <LocationsTab room={room} flash={flash} />}
         {tab === "Clues" && <CluesTab room={room} clues={clues} refresh={refreshClues} flash={flash} />}
         {tab === "Teams" && <TeamsTab room={room} teams={teams} clues={clues} refresh={refreshTeams} flash={flash} />}
         {tab === "Challenges" && <ChallengesTab room={room} teams={teams} flash={flash} refreshState={refreshState} />}

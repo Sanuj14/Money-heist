@@ -7,6 +7,7 @@ import { Scanner } from "@/components/Scanner";
 import { Wordmark } from "@/components/Brand";
 import { BackButton } from "@/components/Nav";
 import { mmss } from "@/lib/format";
+import { useGeoPing } from "@/lib/useGeoPing";
 import type { MyClue, ScanResult, Challenge, LeaderRow } from "@/lib/types";
 
 export default function GameClient({
@@ -24,6 +25,7 @@ export default function GameClient({
   const [now, setNow] = useState(() => Date.now());
   const [loading, setLoading] = useState(true);
   const busyRef = useRef(false);
+  const geoRef = useRef<{ pingNow: () => void } | null>(null);
 
   /* ---------------- data pulls ---------------- */
   const pullClue = useCallback(async () => {
@@ -94,6 +96,7 @@ export default function GameClient({
     if (busyRef.current) return;
     busyRef.current = true;
     setScanOpen(false);
+    geoRef.current?.pingNow();   // stamp this scan with where it happened
     const { data, error } = await supabase.rpc("submit_scan", { p_team_id: teamId, p_token: token });
     const res: ScanResult = error
       ? { ok: false, message: error.message.replace(/^.*?:\s*/, "") }
@@ -104,6 +107,12 @@ export default function GameClient({
     busyRef.current = false;
     setTimeout(() => setFlash(null), res.ok ? 4200 : 3200);
   }, [supabase, teamId, pullClue, pullBoard]);
+
+  const sharingLocation =
+    Boolean(clue) && clue!.room_status === "live" && !clue!.finished;
+  const geo = useGeoPing(teamId, sharingLocation);
+
+  geoRef.current = geo;
 
   const myRow = board.find((b) => b.team_id === teamId);
   const urgent = secsLeft <= 60 && secsLeft > 0;
@@ -122,6 +131,17 @@ export default function GameClient({
               <span className="h-2 w-2 rounded-full" style={{ background: teamColour }} />
               <span className="display text-[13px] text-bone">{teamName}</span>
             </div>
+            {sharingLocation && (
+              <div className="mt-0.5 flex items-center justify-end gap-1 font-mono text-[8px] uppercase tracking-[0.14em]">
+                {geo.status === "on" ? (
+                  <span className="text-mint">◉ Location shared with marshals</span>
+                ) : geo.status === "denied" ? (
+                  <span className="text-bone/35">Location off</span>
+                ) : (
+                  <span className="text-bone/35">Locating…</span>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </header>
